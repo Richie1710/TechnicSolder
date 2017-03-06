@@ -199,14 +199,56 @@ class ModController extends BaseController {
 
 		return Response::view('errors.missing', array(), 404);
 	}
+  public function anyAddVersionFile(){
+		if (Request::ajax())
+		{
+			 $uploaddir = $_POST['repo_location'];
 
-	public function anyAddVersion()
-	{
+			 $uploaddir = $uploaddir.'/mods';
+			 $modslaugdir=$uploaddir.'/'.$_POST['modslaug'];
+			 File::makeDirectory($modslaugdir, $mode = 0777, true, true);
+
+		  if (move_uploaded_file($_FILES['fileupload']['tmp_name'], $modslaugdir.'/'.$_POST['modslaug'].'-'.$_POST['modversion'].'.zip')){
+				$md5sum=md5_file($modslaugdir.'/'.$_POST['modslaug'].'-'.$_POST['modversion'].'.zip');
+
+				$ver = new Modversion();
+				$ver->mod_id = 1;
+				$ver->version = $_POST['modversion'];
+				$ver->md5=$md5sum;
+				$ver->filesize = $_FILES['fileupload']['size'];
+				$ver->save();
+
+				return Response::json(array(
+							'status' => 'success',
+							'version' => $ver->version,
+							'md5' => $md5sum,
+							'filesize' => $ver->humanFilesize("MB"),
+							));
+
+			}else{
+				return Response::json(array(
+							'status' => 'error',
+							'reason' => 'Problems Uploading new File',
+				));
+		  }
+		}
+
+		 #$file = $request->file('fileupload');
+		 #echo 'File Name: '.$file->getClientOriginalName();
+    #echo '<br>';
+		#echo "Controller called";
+		#var_dump($_FILES);
+		#print_r($_FILES['fileupload']['tmp_name']);
+	#}
+}
+
+	public function anyAddVersion(){
 		if (Request::ajax())
 		{
 			$mod_id = Input::get('mod-id');
 			$md5 = Input::get('add-md5');
 			$version = Input::get('add-version');
+
 			if (empty($mod_id) || empty($version))
 				return Response::json(array(
 							'status' => 'error',
@@ -267,8 +309,7 @@ class ModController extends BaseController {
 		return Response::view('errors.missing', array(), 404);
 	}
 
-	public function anyDeleteVersion($ver_id = null)
-	{
+	public function anyDeleteVersion($ver_id = null){
 		if (Request::ajax())
 		{
 			if (empty($ver_id))
@@ -292,10 +333,10 @@ class ModController extends BaseController {
 									'version' => $old_version,
 									'version_id' => $old_id
 									));
-		}
 
 		return Response::view('errors.missing', array(), 404);
 	}
+}
 
 	private function mod_md5($mod, $version)
 	{

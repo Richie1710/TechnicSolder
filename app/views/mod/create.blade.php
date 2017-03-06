@@ -46,6 +46,10 @@
                     <input type="text" class="form-control" name="donatelink" id="donatelink">
                     <span class="help-block">This is only in use by the official Technic Solder</span>
                 </div>
+                <div class="form-group">
+                    <label for="modfile">Forge URL</label>
+                    <input type="text" class="form-control" name="mflink" id="mflink">
+                </div>
 			</div>
 			<div class="col-md-6">
 				<p>Because Solder doesn't do any file handling yet you will need to manually manage your set of mods in your repository. The mod repository structure is very strict and must match your Solder data exact. An example of your mod directory structure will be listed below:</p>
