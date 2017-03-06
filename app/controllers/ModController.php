@@ -327,7 +327,28 @@ class ModController extends BaseController {
 
 			$old_id = $ver->id;
 			$old_version = $ver->version;
+			$mod_id= $ver->mod_id;
 			$ver->delete();
+
+			$mod = Mod::find($mod_id);
+			if (empty($mod))
+			return Response::json(array(
+						'status' => 'error',
+						'reason' => "Could not pull mod database"
+						));
+
+			$repolocation=Config::get("solder.repo_location");
+			$myfile = $repolocation.'/mods/'.$mod->name.'/'.$mod->name.'-'.$old_version.'.zip';
+
+			if (File::exists($myfile))
+			{
+    			File::delete($myfile);
+			}else{
+				return Response::json(array(
+							'status' => 'error',
+							'reason' => "File $myfile doesnt exist"
+							));
+			}
 			return Response::json(array(
 									'status' => 'success',
 									'version' => $old_version,
