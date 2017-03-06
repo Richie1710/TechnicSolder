@@ -67,7 +67,6 @@
 					{{ Form::submit('Save Changes', array('class' => 'btn btn-success')) }}
 					{{ HTML::link('mod/delete/'.$mod->id, 'Delete Mod', array('class' => 'btn btn-danger')) }}
 					{{ HTML::link('mod/list/', 'Go Back', array('class' => 'btn btn-primary')) }}
-					{{ HTML::link('mod/list/', 'Sync', array('class' => 'btn btn-primary')) }}
 				</form>
 			</div>
 			<div class="tab-pane fade in active" id="versions">
@@ -81,7 +80,6 @@
 						<th style="width: 25%">MD5</th>
 						<th style="width: 30%">Download URL</th>
 						<th style="width: 9%">Filesize</th>
-						<th style="width: 10%"></th>
 						<th style="width: 10%"></th>
 					</thead>
 					<tbody>

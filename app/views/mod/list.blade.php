@@ -34,7 +34,6 @@
 					<th>Author</th>
 					<th>Website</th>
 					<th>Actions</th>
-          <th>ForgeUrl</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -54,7 +53,6 @@
 					<td>{{ !empty($mod->link) ? HTML::link($mod->link, $mod->link, array("target" => "_blank")) : "N/A" }}</td>
           <td>{{ !empty($mod->forgeurl) ? HTML::link($mod->forgeurl, $mod->forgeurl, array("target" => "_blank")) : "N/A" }}</td>
 					<td>{{ HTML::link('mod/view/'.$mod->id,'Manage', array("class" => "btn btn-xs btn-primary")) }}</td>
-          <td>{{ HTML::link('mod/syncwizzard/'.$mod->id,'Sync', array("class" => "btn btn-xs btn-primary")) }}</td>
 				</tr>
 			@endforeach
 		</table>

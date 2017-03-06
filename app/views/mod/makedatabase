@@ -1,4 +1,0 @@
-CREATE USER 'solder'@'localhost' IDENTIFIED BY 'some_pass';
-CREATE DATABASE solder
-GRANT ALL PRIVILEGES ON solder.* TO 'solder'@'localhost';
-FLUSH PRIVILIGES
