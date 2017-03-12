@@ -147,7 +147,7 @@
 					</div>
 					<div class="form-group" style="height:30px">
 							<label for="fileupload">File for Upload.</label>
-							<input type="file" class="form-control" name="fileupload" id="fileupload">
+							<input type="file" class="file" name="fileupload" id="fileupload">
 							<span class="help-block">The File will be renamed to given Version</span>
 					</div>
 				</form>
